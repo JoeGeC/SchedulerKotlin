@@ -40,7 +40,7 @@ class SchedulerShould {
     fun outputNextTimeTomorrowOnSameTime()
     {
         val scheduler = Scheduler(2, 30)
-        assertEquals("2:30 tomorrow", scheduler.getNextTimeOf(2, 30))
+        assertEquals("2:30 today", scheduler.getNextTimeOf(2, 30))
     }
 
     @Test
@@ -82,28 +82,14 @@ class SchedulerShould {
     fun outputNextTimeOnAnyMinuteSameHour()
     {
         val scheduler = Scheduler(5, 45)
-        assertEquals("5:46 today", scheduler.getNextTimeOf(5, -1))
+        assertEquals("5:45 today", scheduler.getNextTimeOf(5, -1))
     }
 
     @Test
     fun outputNextTimeOnAnyHourAnyMinute()
     {
         val scheduler = Scheduler(5, 45)
-        assertEquals("5:46 today", scheduler.getNextTimeOf(-1, -1))
-    }
-
-    @Test
-    fun outputNextTimeOnAnyHourAnyMinute59Mins()
-    {
-        val scheduler = Scheduler(5, 59)
-        assertEquals("6:00 today", scheduler.getNextTimeOf(-1, -1))
-    }
-
-    @Test
-    fun outputNextTimeOnAnyHourAnyMinute23Hours59Mins()
-    {
-        val scheduler = Scheduler(23, 59)
-        assertEquals("0:00 tomorrow", scheduler.getNextTimeOf(-1, -1))
+        assertEquals("5:45 today", scheduler.getNextTimeOf(-1, -1))
     }
 
     @Test

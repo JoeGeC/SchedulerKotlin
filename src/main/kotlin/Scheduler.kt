@@ -8,7 +8,7 @@ class Scheduler(
     {
         hourResult = handleAnyHour(scheduledHour, scheduledMinutes)
         val minuteResult = handleAnyMinute(scheduledHour, scheduledMinutes)
-        if (hourResult < currentHour || (hourResult == currentHour && minuteResult <= currentMinute))
+        if (hourResult < currentHour || (hourResult == currentHour && minuteResult < currentMinute))
             return "${formatTime(hourResult, minuteResult)} tomorrow"
         return "${formatTime(hourResult, minuteResult)} today"
     }
@@ -31,24 +31,8 @@ class Scheduler(
     {
         if (scheduledMinutes != -1) return scheduledMinutes
         if (scheduledHour == currentHour || scheduledHour == -1)
-            return incrementMinute()
+            return currentMinute
         return 0
-    }
-
-    private fun incrementMinute(): Int
-    {
-        val result = currentMinute + 1
-        if (result < 60)
-            return result
-        incrementHourResult()
-        return 0
-    }
-
-    private fun incrementHourResult()
-    {
-        hourResult++
-        if (hourResult >= 24)
-            hourResult = 0
     }
 
     private fun formatTime(hour: Int, minutes: Int): String = "${hour}:${String.format("%02d", minutes)}"
