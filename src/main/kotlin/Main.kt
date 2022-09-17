@@ -3,8 +3,14 @@ class Main{
         @JvmStatic fun main(args: Array<String>) {
             val input = generateSequence(::readLine)
             val lines = input.toList()
-            run(lines, args[0].split(":"))
+            if(args.isEmpty())
+                printError()
+            else
+                run(lines, args[0].split(":"))
         }
+
+        private fun printError() =
+            println("Please enter the command in the format <cat input.txt | java -jar SchedulerParser.jar hh:mm>")
 
         private fun run(config: List<String>, time: List<String>)
         {
